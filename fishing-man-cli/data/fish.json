@@ -1,0 +1,156 @@
+{
+	"fish": [
+		{
+			"id": "sardine",
+			"name": "沙丁鱼",
+			"zone": "near",
+			"rarity": "common",
+			"base_price": 10,
+			"desc": "喜欢成群穿过近岸暖流，是新手最容易遇到的小型鱼。",
+			"tags": [
+				"small"
+			],
+			"pull_curve": "steady"
+		},
+		{
+			"id": "mackerel",
+			"name": "鲭鱼",
+			"zone": "near",
+			"rarity": "common",
+			"base_price": 18,
+			"desc": "近海常见的中型鱼，肉质紧实。",
+			"tags": [
+				"bottom"
+			],
+			"pull_curve": "steady"
+		},
+		{
+			"id": "sea_bream",
+			"name": "海鲷",
+			"zone": "near",
+			"rarity": "common",
+			"base_price": 35,
+			"desc": "体色鲜艳，常出没于浅礁附近。",
+			"tags": [
+				"bottom"
+			],
+			"pull_curve": "slippery"
+		},
+		{
+			"id": "clownfish",
+			"name": "小丑鱼",
+			"zone": "near",
+			"rarity": "common",
+			"base_price": 42,
+			"desc": "活泼好动，喜欢躲在近岸珊瑚带。",
+			"tags": [
+				"small"
+			],
+			"pull_curve": "steady"
+		},
+		{
+			"id": "pufferfish",
+			"name": "河豚",
+			"zone": "near",
+			"rarity": "common",
+			"base_price": 48,
+			"desc": "受惊会鼓起身子，近海偶遇。",
+			"tags": [
+				"bottom"
+			],
+			"pull_curve": "steady"
+		},
+		{
+			"id": "butterflyfish",
+			"name": "蝴蝶鱼",
+			"zone": "near",
+			"rarity": "common",
+			"base_price": 55,
+			"desc": "鳍如蝶翅，色彩斑斓。",
+			"tags": [
+				"small"
+			],
+			"pull_curve": "slippery"
+		},
+		{
+			"id": "tuna",
+			"name": "金枪鱼",
+			"zone": "mid",
+			"rarity": "rare",
+			"base_price": 80,
+			"desc": "游速极快的中海猎手。",
+			"tags": [
+				"aggressive",
+				"large",
+				"lure"
+			],
+			"pull_curve": "burst"
+		},
+		{
+			"id": "sailfish",
+			"name": "旗鱼",
+			"zone": "mid",
+			"rarity": "rare",
+			"base_price": 140,
+			"desc": "背鳍高扬如旗，力量十足。",
+			"tags": [
+				"aggressive",
+				"large",
+				"lure"
+			],
+			"pull_curve": "burst"
+		},
+		{
+			"id": "mahi",
+			"name": "鬼头刀",
+			"zone": "mid",
+			"rarity": "rare",
+			"base_price": 165,
+			"desc": "中海名贵鱼，市场价格波动大。",
+			"tags": [
+				"aggressive",
+				"large"
+			],
+			"pull_curve": "burst"
+		},
+		{
+			"id": "snapper",
+			"name": "红鲷",
+			"zone": "far",
+			"rarity": "rare",
+			"base_price": 120,
+			"desc": "远海礁盘附近的红色珍品。",
+			"tags": [
+				"bottom"
+			],
+			"pull_curve": "slippery"
+		},
+		{
+			"id": "grouper",
+			"name": "石斑",
+			"zone": "far",
+			"rarity": "rare",
+			"base_price": 200,
+			"desc": "体型较大，需更强钓竿。",
+			"tags": [
+				"bottom",
+				"large"
+			],
+			"pull_curve": "burst"
+		},
+		{
+			"id": "king_mackerel",
+			"name": "鲭王",
+			"zone": "far",
+			"rarity": "legend",
+			"base_price": 320,
+			"desc": "远海传说，潮高潮时更易遇见。",
+			"tags": [
+				"aggressive",
+				"large",
+				"lure"
+			],
+			"pull_curve": "burst"
+		}
+	]
+}

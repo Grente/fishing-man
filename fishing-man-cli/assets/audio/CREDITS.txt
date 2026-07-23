@@ -1,0 +1,28 @@
+# Kenney Interface Sounds (CC0)
+# Source: https://kenney.nl/assets/interface-sounds
+# Also on OpenGameArt: https://opengameart.org/content/interface-sounds
+# License: Creative Commons CC0 1.0 Universal
+# Credit "Kenney.nl" is appreciated but not required.
+#
+# Files mapped into assets/audio/sfx/*.ogg:
+#   ui_click, ui_open, ui_close, success, fail, coin, select, upgrade,
+#   drop, pluck, tick, fanfare
+
+# Freesound clips (CC0 previews, converted to Ogg Vorbis for this project):
+# - ambient_sea.ogg - Calm ocean waves by SamsterBirdies
+#   https://freesound.org/people/SamsterBirdies/sounds/578524/
+# - boat_hum.ogg - Motorboat Engine by chungus43A
+#   https://freesound.org/people/chungus43A/sounds/609616/
+# - cast.ogg - Casting Fishing Rod for Game Fishing SFX by el_boss
+#   https://freesound.org/people/el_boss/sounds/853287/
+# - splash.ogg - Fishing Lure Plop Water - Game SFX (2 or 2) by el_boss
+#   https://freesound.org/people/el_boss/sounds/853279/
+# - reel.ogg - Fishing reel winding by 1bob
+#   https://freesound.org/people/1bob/sounds/831928/
+# - bite.ogg - Popping Cork by milcahrawr
+#   https://freesound.org/people/milcahrawr/sounds/622150/
+# License: Creative Commons 0
+#
+# Procedural weather ambience (project-generated WAV noise for storm zones):
+# - storm_rain.wav / storm_thunder.wav
+# Visuals: assets/world/weather/storm_small.png, storm_large.png, rain_streak.png

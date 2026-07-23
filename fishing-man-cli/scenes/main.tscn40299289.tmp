@@ -1,0 +1,608 @@
+[gd_scene format=3 uid="uid://cwufbumdspwjt"]
+
+[ext_resource type="Script" uid="uid://bxcb2cxupu6kr" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://cw2f025mep83l" path="res://scripts/ocean_world.gd" id="2_world"]
+[ext_resource type="Script" uid="uid://cfd6hv1becxed" path="res://scripts/boat.gd" id="3_boat"]
+[ext_resource type="Script" uid="uid://6bqf8kgud5f0" path="res://scripts/fishing_session.gd" id="4_session"]
+[ext_resource type="Script" uid="uid://b2muu42lo3bef" path="res://scripts/ui/game_ui.gd" id="5_ui"]
+[ext_resource type="Script" uid="uid://c1xehliq14xny" path="res://scripts/ui/market_panel.gd" id="6_market"]
+[ext_resource type="Script" uid="uid://bj2mxi5hhgg4f" path="res://scripts/ui/encyclopedia_panel.gd" id="7_ency"]
+[ext_resource type="Script" uid="uid://bip68eq6yrpsv" path="res://scripts/ui/minimap.gd" id="8_minimap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boat"]
+size = Vector2(56, 96)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.102, 0.165, 0.196, 0.92)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.16, 0.24, 0.28, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cast"]
+bg_color = Color(0.98, 0.82, 0.2, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Main" type="Node2D" unique_id=929253630]
+script = ExtResource("1_main")
+
+[node name="OceanWorld" type="Node2D" parent="." unique_id=34573564]
+script = ExtResource("2_world")
+
+[node name="Environment" type="Node2D" parent="OceanWorld" unique_id=1249471585]
+
+[node name="Spots" type="Node2D" parent="OceanWorld" unique_id=891934490]
+
+[node name="Boat" type="CharacterBody2D" parent="OceanWorld" unique_id=1643719094]
+position = Vector2(720, 2080)
+script = ExtResource("3_boat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OceanWorld/Boat" unique_id=1949314920]
+shape = SubResource("RectangleShape2D_boat")
+
+[node name="Visual" type="Node2D" parent="OceanWorld/Boat" unique_id=782179442]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=285950627]
+position = Vector2(720, 2080)
+
+[node name="FishingSession" type="Node" parent="." unique_id=601971815]
+script = ExtResource("4_session")
+
+[node name="GameUI" type="CanvasLayer" parent="." unique_id=1054569624]
+script = ExtResource("5_ui")
+
+[node name="HUD" type="Control" parent="GameUI" unique_id=1793317454]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopLeft" type="VBoxContainer" parent="GameUI/HUD" unique_id=651694879]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 280.0
+offset_bottom = 180.0
+theme_override_constants/separation = 4
+
+[node name="GoldLabel" type="Label" parent="GameUI/HUD/TopLeft" unique_id=1482422256]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.957, 0.827, 0.369, 1)
+theme_override_font_sizes/font_size = 30
+text = "金币 480"
+
+[node name="CargoLabel" type="Label" parent="GameUI/HUD/TopLeft" unique_id=1707497351]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "货舱 0/4"
+
+[node name="CargoBar" type="ProgressBar" parent="GameUI/HUD/TopLeft" unique_id=1502712188]
+custom_minimum_size = Vector2(200, 14)
+layout_mode = 2
+max_value = 4.0
+show_percentage = false
+
+[node name="FuelRow" type="HBoxContainer" parent="GameUI/HUD/TopLeft" unique_id=290913169]
+layout_mode = 2
+
+[node name="FuelLabel" type="Label" parent="GameUI/HUD/TopLeft/FuelRow" unique_id=306499084]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "油 95/95"
+
+[node name="FuelBar" type="ProgressBar" parent="GameUI/HUD/TopLeft/FuelRow" unique_id=220492187]
+custom_minimum_size = Vector2(120, 14)
+layout_mode = 2
+max_value = 95.0
+value = 95.0
+show_percentage = false
+
+[node name="TideLabel" type="Label" parent="GameUI/HUD/TopLeft" unique_id=52984773]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "潮汐 平潮"
+
+[node name="Minimap" type="PanelContainer" parent="GameUI/HUD" unique_id=1739745373]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 16.0
+offset_right = 704.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/HUD/Minimap" unique_id=241624623]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameUI/HUD/Minimap/VBox" unique_id=1098608653]
+layout_mode = 2
+text = "航海图"
+horizontal_alignment = 1
+
+[node name="MapDraw" type="ColorRect" parent="GameUI/HUD/Minimap/VBox" unique_id=1484353224]
+custom_minimum_size = Vector2(160, 140)
+layout_mode = 2
+color = Color(0.12, 0.28, 0.32, 1)
+script = ExtResource("8_minimap")
+
+[node name="BottomRight" type="VBoxContainer" parent="GameUI/HUD" unique_id=947599792]
+visible = false
+layout_mode = 0
+offset_left = 560.0
+offset_top = 1120.0
+offset_right = 700.0
+offset_bottom = 1260.0
+
+[node name="FishBtn" type="Button" parent="GameUI/HUD/BottomRight" unique_id=648447795]
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "鱼 0/12"
+
+[node name="Hint" type="Label" parent="GameUI/HUD" unique_id=340125403]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 1180.0
+offset_right = 400.0
+offset_bottom = 1260.0
+theme_override_font_sizes/font_size = 22
+text = "拖动浏览海域"
+autowrap_mode = 2
+
+[node name="CastBtn" type="Button" parent="GameUI/HUD" unique_id=2112222044]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 520.0
+offset_right = 460.0
+offset_bottom = 590.0
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_cast")
+text = "抛竿"
+
+[node name="DockPanel" type="PanelContainer" parent="GameUI" unique_id=709696393]
+offset_left = 160.0
+offset_top = 420.0
+offset_right = 560.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/DockPanel" unique_id=1370906649]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="GameUI/DockPanel/VBox" unique_id=430492204]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "码头"
+horizontal_alignment = 1
+
+[node name="SellBtn" type="Button" parent="GameUI/DockPanel/VBox" unique_id=1279173799]
+layout_mode = 2
+text = "卖出货舱"
+
+[node name="BoatBtn" type="Button" parent="GameUI/DockPanel/VBox" unique_id=1082953035]
+layout_mode = 2
+text = "升级船只"
+
+[node name="RodBtn" type="Button" parent="GameUI/DockPanel/VBox" unique_id=995784165]
+layout_mode = 2
+text = "升级钓竿"
+
+[node name="MarketBtn" type="Button" parent="GameUI/DockPanel/VBox" unique_id=1311245703]
+layout_mode = 2
+text = "海鲜市场"
+
+[node name="FishingPanel" type="PanelContainer" parent="GameUI" unique_id=1824629377]
+offset_left = 24.0
+offset_top = 880.0
+offset_right = 696.0
+offset_bottom = 1160.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/FishingPanel" unique_id=109551327]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="GameUI/FishingPanel/VBox" unique_id=775627753]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="GameUI/FishingPanel/VBox/Header" unique_id=9172822]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.0s"
+horizontal_alignment = 2
+
+[node name="WaitLabel" type="Label" parent="GameUI/FishingPanel/VBox" unique_id=242163271]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "等待鱼上钩…"
+
+[node name="Hint" type="Label" parent="GameUI/FishingPanel/VBox" unique_id=196967606]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "收线时机 · 点击屏幕 · 白线落入亮色区"
+
+[node name="TimingTrack" type="Control" parent="GameUI/FishingPanel/VBox" unique_id=58899179]
+custom_minimum_size = Vector2(640, 36)
+layout_mode = 2
+
+[node name="Bg" type="ColorRect" parent="GameUI/FishingPanel/VBox/TimingTrack" unique_id=16910948]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 36.0
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Green" type="ColorRect" parent="GameUI/FishingPanel/VBox/TimingTrack" unique_id=2114460906]
+layout_mode = 0
+offset_left = 280.0
+offset_right = 460.0
+offset_bottom = 36.0
+color = Color(0.2, 0.75, 0.35, 0.85)
+
+[node name="Perfect" type="ColorRect" parent="GameUI/FishingPanel/VBox/TimingTrack" unique_id=1256312736]
+layout_mode = 0
+offset_left = 340.0
+offset_right = 410.0
+offset_bottom = 36.0
+color = Color(0.95, 0.9, 0.25, 0.95)
+
+[node name="Cursor" type="ColorRect" parent="GameUI/FishingPanel/VBox/TimingTrack" unique_id=1452403991]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 36.0
+
+[node name="CatchPanel" type="PanelContainer" parent="GameUI" unique_id=1878437302]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -380.0
+offset_right = 280.0
+offset_bottom = 380.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/CatchPanel" unique_id=898697731]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleRow" type="HBoxContainer" parent="GameUI/CatchPanel/VBox" unique_id=623335478]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="GameUI/CatchPanel/VBox/TitleRow" unique_id=512644740]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
+text = "沙丁鱼"
+
+[node name="RarityLabel" type="Label" parent="GameUI/CatchPanel/VBox/TitleRow" unique_id=1215278849]
+layout_mode = 2
+text = "常见"
+
+[node name="NewBadge" type="Label" parent="GameUI/CatchPanel/VBox" unique_id=926023799]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.42, 0.21, 1)
+theme_override_font_sizes/font_size = 26
+text = "NEW"
+horizontal_alignment = 2
+
+[node name="FishSwatch" type="ColorRect" parent="GameUI/CatchPanel/VBox" unique_id=570128262]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+color = Color(0.43, 0.78, 1, 1)
+
+[node name="PriceLabel" type="Label" parent="GameUI/CatchPanel/VBox" unique_id=9767693]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.957, 0.827, 0.369, 1)
+theme_override_font_sizes/font_size = 26
+text = "今日价格：9"
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="GameUI/CatchPanel/VBox" unique_id=344172469]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "描述"
+autowrap_mode = 3
+
+[node name="ContinueBtn" type="Button" parent="GameUI/CatchPanel/VBox" unique_id=1446555696]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+text = "继续"
+
+[node name="MarketPanel" type="Control" parent="GameUI" unique_id=622516096]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_market")
+
+[node name="Dim" type="ColorRect" parent="GameUI/MarketPanel" unique_id=1467909306]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="GameUI/MarketPanel" unique_id=575824155]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = -24.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/MarketPanel/Panel" unique_id=44191850]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="GameUI/MarketPanel/Panel/VBox" unique_id=861359360]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameUI/MarketPanel/Panel/VBox/Header" unique_id=1120441579]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "海鲜市场"
+horizontal_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="GameUI/MarketPanel/Panel/VBox/Header" unique_id=1924289208]
+custom_minimum_size = Vector2(88, 48)
+layout_mode = 2
+text = "关闭"
+
+[node name="SubHeader" type="HBoxContainer" parent="GameUI/MarketPanel/Panel/VBox" unique_id=1226321553]
+layout_mode = 2
+
+[node name="Sentiment" type="Label" parent="GameUI/MarketPanel/Panel/VBox/SubHeader" unique_id=588006221]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.957, 0.827, 0.369, 1)
+text = "今日行情  买气旺盛"
+
+[node name="UpDown" type="HBoxContainer" parent="GameUI/MarketPanel/Panel/VBox/SubHeader" unique_id=1383855188]
+layout_mode = 2
+
+[node name="UpLabel" type="Label" parent="GameUI/MarketPanel/Panel/VBox/SubHeader/UpDown" unique_id=1137065347]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.35, 0.31, 1)
+text = "上涨 0"
+
+[node name="DownLabel" type="Label" parent="GameUI/MarketPanel/Panel/VBox/SubHeader/UpDown" unique_id=743838825]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.357, 0.753, 0.745, 1)
+text = "下跌 0"
+
+[node name="Cols" type="HBoxContainer" parent="GameUI/MarketPanel/Panel/VBox" unique_id=886883193]
+layout_mode = 2
+
+[node name="C1" type="Label" parent="GameUI/MarketPanel/Panel/VBox/Cols" unique_id=1206129424]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "鱼获"
+
+[node name="C2" type="Label" parent="GameUI/MarketPanel/Panel/VBox/Cols" unique_id=396074282]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "稀有度"
+
+[node name="C3" type="Label" parent="GameUI/MarketPanel/Panel/VBox/Cols" unique_id=1004912105]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "今日价"
+
+[node name="C4" type="Label" parent="GameUI/MarketPanel/Panel/VBox/Cols" unique_id=619816707]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "涨跌"
+
+[node name="Scroll" type="ScrollContainer" parent="GameUI/MarketPanel/Panel/VBox" unique_id=76253478]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="GameUI/MarketPanel/Panel/VBox/Scroll" unique_id=723301940]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EncyclopediaPanel" type="Control" parent="GameUI" unique_id=851871303]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_ency")
+
+[node name="Dim" type="ColorRect" parent="GameUI/EncyclopediaPanel" unique_id=554756589]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="GameUI/EncyclopediaPanel" unique_id=2033700717]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = -16.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/EncyclopediaPanel/Panel" unique_id=2053540807]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="GameUI/EncyclopediaPanel/Panel/VBox" unique_id=498230784]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameUI/EncyclopediaPanel/Panel/VBox/Header" unique_id=1136255196]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "鱼缸与图鉴"
+
+[node name="Progress" type="Label" parent="GameUI/EncyclopediaPanel/Panel/VBox/Header" unique_id=177469779]
+layout_mode = 2
+text = "0/12"
+
+[node name="CloseBtn" type="Button" parent="GameUI/EncyclopediaPanel/Panel/VBox/Header" unique_id=396895866]
+custom_minimum_size = Vector2(88, 48)
+layout_mode = 2
+text = "关闭"
+
+[node name="Tank" type="ColorRect" parent="GameUI/EncyclopediaPanel/Panel/VBox" unique_id=1179746544]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+color = Color(0.12, 0.35, 0.48, 1)
+
+[node name="Hint" type="Label" parent="GameUI/EncyclopediaPanel/Panel/VBox" unique_id=1627666243]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "完整图鉴 · 彩色为已发现，灰色为未发现"
+
+[node name="Scroll" type="ScrollContainer" parent="GameUI/EncyclopediaPanel/Panel/VBox" unique_id=862923779]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Grid" type="GridContainer" parent="GameUI/EncyclopediaPanel/Panel/VBox/Scroll" unique_id=1416973243]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="Detail" type="PanelContainer" parent="GameUI/EncyclopediaPanel" unique_id=1883567901]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -360.0
+offset_right = 260.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/EncyclopediaPanel/Detail" unique_id=1366253034]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CloseBtn" type="Button" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=1644054983]
+custom_minimum_size = Vector2(100, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "关闭"
+
+[node name="Nav" type="HBoxContainer" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=1336316076]
+layout_mode = 2
+alignment = 1
+
+[node name="PrevBtn" type="Button" parent="GameUI/EncyclopediaPanel/Detail/VBox/Nav" unique_id=1674706236]
+custom_minimum_size = Vector2(110, 48)
+layout_mode = 2
+text = "上一个"
+
+[node name="NextBtn" type="Button" parent="GameUI/EncyclopediaPanel/Detail/VBox/Nav" unique_id=620262143]
+custom_minimum_size = Vector2(110, 48)
+layout_mode = 2
+text = "下一个"
+
+[node name="Swatch" type="ColorRect" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=1843663494]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+color = Color(0.43, 0.78, 1, 1)
+
+[node name="RarityLabel" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=751315318]
+layout_mode = 2
+text = "常见"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=1296619411]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "沙丁鱼"
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=1354361139]
+layout_mode = 2
+text = "描述"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Stats" type="HBoxContainer" parent="GameUI/EncyclopediaPanel/Detail/VBox" unique_id=789857795]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="PriceBox" type="VBoxContainer" parent="GameUI/EncyclopediaPanel/Detail/VBox/Stats" unique_id=2041941931]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PriceTitle" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox/Stats/PriceBox" unique_id=598925589]
+layout_mode = 2
+text = "单价"
+horizontal_alignment = 1
+
+[node name="PriceValue" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox/Stats/PriceBox" unique_id=2060546986]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.957, 0.827, 0.369, 1)
+text = "10 金币"
+horizontal_alignment = 1
+
+[node name="ZoneBox" type="VBoxContainer" parent="GameUI/EncyclopediaPanel/Detail/VBox/Stats" unique_id=1515792229]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ZoneTitle" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox/Stats/ZoneBox" unique_id=1456685646]
+layout_mode = 2
+text = "出现区域"
+horizontal_alignment = 1
+
+[node name="ZoneValue" type="Label" parent="GameUI/EncyclopediaPanel/Detail/VBox/Stats/ZoneBox" unique_id=1520036122]
+layout_mode = 2
+text = "近海"
+horizontal_alignment = 1
+
+[node name="Toast" type="Label" parent="GameUI" unique_id=770112299]
+visible = false
+offset_left = 80.0
+offset_top = 640.0
+offset_right = 640.0
+offset_bottom = 700.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "提示"
+horizontal_alignment = 1
+vertical_alignment = 1
